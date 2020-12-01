@@ -8,7 +8,7 @@ Estos se encontraran en las carpetas, asi como tambien en el apartado releases.
 
 - Comisión: 1K4
 - Integrantes:
-    Moreno Ivanoff Jeremías DNI: 42939900
-    Julián Martín DNI: 43964806
-    Mariano Moya Legajo: 50631
+   - Moreno Ivanoff Jeremías DNI: 42939900
+   - Julián Martín DNI: 43964806
+   - Mariano Moya Legajo: 50631
 - Vocero: Moreno Ivanoff Jeremías.

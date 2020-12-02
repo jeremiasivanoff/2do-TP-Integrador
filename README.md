@@ -12,3 +12,5 @@ Estos se encontraran en las carpetas, asi como tambien en el apartado releases.
    - Julián Martín DNI: 43964806 jeremy bb
    - Mariano Moya Legajo: 50631
 - Vocero: Moreno Ivanoff Jeremías.
+ 
+prueba de commit

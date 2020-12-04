@@ -57,10 +57,55 @@ main()
     Mascota reg_mascotas[50];
     Turnos reg_turnos[50];
     int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0;
+    int opcion;
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
 	
-	end();
+
+    do
+    {
+        system("cls");
+        printf("\t\t\tModulo Consultorio Veterinario");
+        printf("\t\t\t\n==============================");
+        printf("\t\t\t\n1.- Iniciar Sesion.");
+        printf("\t\t\t\n2.- Visulizar Lista de Espera de Turnos (Informe).");
+        printf("\t\t\t\n3.- Registrar Evolucion de la Mascota.");
+        printf("\t\t\t\n");
+        printf("\t\t\t\n4.- Cerrar la aplicacion.");
+        printf("\t\t\t\n");
+        printf("\t\t\t\nIngrese una opcion: ");
+        scanf("%d",&opcion);
+
+        switch (opcion)
+        {
+        case 1:
+            
+            printf("\n\n");
+            system("pause");
+            break;
+        
+        case 2:
+            
+            printf("\n\n");
+            system("pause");
+            break;
+        
+        case 3:
+            
+            printf("\n\n");
+            system("pause");
+            break;
+
+        case 4:
+            printf("\n\tGracias por utilizar el programa.");
+            printf("\n\n");
+            system("pause");
+            break;
+        
+        default:
+            break;
+        }
+    } while (opcion != 4);
 }
 
 void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_usuarios,int num_vets,int num_mascotas,int num_turnos)
@@ -149,19 +194,3 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
     }
 }
 
-
-
-
-
-
-
-
-
-void end()
-{
-	printf("\n\n");
-	system("pause");
-    printf("\n\tGracias por utilizar el programa.");
- 	printf("\n\n");
-	system("pause");
-}

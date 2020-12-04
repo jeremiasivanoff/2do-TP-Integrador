@@ -93,21 +93,20 @@ main()
                 }
                 else
                 {
-                    printf("\nNo inicio sesion, volverá al menu.");
+                    printf("\nNo inicio sesion, volvera al menu.");
                 }
                 printf("\n\n");
                 system("pause");
                 break;
             
             case 3:
-                
                 if (inicio)
                 {
                     
                 }
                 else
                 {
-                    printf("\nNo inicio sesion, volverá al menu.");
+                    printf("\nNo inicio sesion, volvera al menu.");
                 }
                 printf("\n\n");
                 system("pause");

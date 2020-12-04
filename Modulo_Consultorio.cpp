@@ -66,64 +66,64 @@ main()
     do
     {
         system("cls");
-        printf("\t\t\tModulo Consultorio Veterinario");
-        printf("\t\t\t\n==============================");
-        printf("\t\t\t\n1.- Iniciar Sesion.");
-        printf("\t\t\t\n2.- Visulizar Lista de Espera de Turnos (Informe).");
-        printf("\t\t\t\n3.- Registrar Evolucion de la Mascota.");
-        printf("\t\t\t\n");
-        printf("\t\t\t\n4.- Cerrar la aplicacion.");
-        printf("\t\t\t\n");
-        printf("\t\t\t\nIngrese una opcion: ");
+        printf("\t\tModulo Consultorio Veterinario\n");
+        printf("\t\t==============================\n");
+        printf("\t1.- Iniciar Sesion.\n");
+        printf("\t2.- Visulizar Lista de Espera de Turnos (Informe).\n");
+        printf("\t3.- Registrar Evolucion de la Mascota.");
+        printf("\n");
+        printf("\t4.- Cerrar la aplicacion.");
+        printf("\n");
+        printf("\tIngrese una opcion: ");
         scanf("%d",&opcion);
 
         switch (opcion)
         {
-        case 1:
-            
-            inicio=true;
-            printf("\n\n");
-            system("pause");
-            break;
-        
-        case 2:
-            if (inicio)
-            {
+            case 1:
                 
-            }
-            else
-            {
-                printf("\nNo inicio sesion, volverá al menu.");
-            }
-            printf("\n\n");
-            system("pause");
-            break;
-        
-        case 3:
+                inicio=true;
+                printf("\n\n");
+                system("pause");
+                break;
             
-            if (inicio)
-            {
+            case 2:
+                if (inicio)
+                {
+                    
+                }
+                else
+                {
+                    printf("\nNo inicio sesion, volverá al menu.");
+                }
+                printf("\n\n");
+                system("pause");
+                break;
+            
+            case 3:
                 
-            }
-            else
-            {
-                printf("\nNo inicio sesion, volverá al menu.");
-            }
-            printf("\n\n");
-            system("pause");
-            break;
+                if (inicio)
+                {
+                    
+                }
+                else
+                {
+                    printf("\nNo inicio sesion, volverá al menu.");
+                }
+                printf("\n\n");
+                system("pause");
+                break;
 
-        case 4:
-            printf("\n\tGracias por utilizar el programa.");
-            printf("\n\n");
-            system("pause");
-            break;
-        
-        default:
-            printf("\nIngreso una opcion incorrecta, volvera al menu.");
-            printf("\n\n");
-            system("pause");
-            break;
+            case 4:
+                printf("\n\tGracias por utilizar el programa.");
+                printf("\n\n");
+                system("pause");
+                break;
+            
+            default:
+                printf("\nIngreso una opcion incorrecta, volvera al menu.");
+                printf("\n\n");
+                system("pause");
+                break;
         }
     } while (opcion != 4);
 }

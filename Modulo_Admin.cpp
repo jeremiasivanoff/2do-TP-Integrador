@@ -86,35 +86,36 @@ void registrarusuario(FILE *usuario1, usuario user)
 	gets(user.usuario);
 	if(strlen(user.usuario)>=6 and strlen(user.usuario)<=10)
 		{
-			for(i=0;i<=user.usuario[i];i++)
+			if(user.usuario[0]>=97 and user.usuario[0]<=122)
 			{
-				if(user.usuario[0]>=97 and user.usuario[0]<=122)
-				{
-					printf("\nLa primera letra es minuscula.");
+				printf("\nLa primera letra es minuscula.");
+				for(i=0;i<=user.usuario[i];i++)
+				{	
 					if(user.usuario[i]>=65 and user.usuario[i]<=90)
 					{
 						mayus++;
 						if(mayus>=2)
 						{
 							printf("\nEl usuario contiene al menos 2 letras mayusculas.");
-							printf("\nUsuario válido");
-							
-						}
-						else
-						{
-							printf("\nNo posee la cantidad minima de mayusculas.");
+							printf("\nUsuario vï¿½lido");
+							break;
 						}
 					}
 				}
-				else
+				if(mayus==0)
 				{
-					printf("\nLa primera letra del usuario debe ser minuscula.");
+					printf("\nNo posee la cantidad minima de mayusculas.");
 				}
 			}
+			else
+			{
+				printf("\nLa primera letra del usuario debe ser minuscula.");
+			}
+			
 		}
 		else
 		{
-			printf("\nUsuario inválido");
+			printf("\nUsuario invï¿½lido");
 		}
 }
 

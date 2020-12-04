@@ -58,6 +58,7 @@ main()
     Turnos reg_turnos[50];
     int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0;
     int opcion;
+    bool inicio=false;
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
 	
@@ -80,18 +81,34 @@ main()
         {
         case 1:
             
+            inicio=true;
             printf("\n\n");
             system("pause");
             break;
         
         case 2:
-            
+            if (inicio)
+            {
+                
+            }
+            else
+            {
+                printf("\nNo inicio sesion, volverá al menu.");
+            }
             printf("\n\n");
             system("pause");
             break;
         
         case 3:
             
+            if (inicio)
+            {
+                
+            }
+            else
+            {
+                printf("\nNo inicio sesion, volverá al menu.");
+            }
             printf("\n\n");
             system("pause");
             break;
@@ -103,6 +120,9 @@ main()
             break;
         
         default:
+            printf("\nIngreso una opcion incorrecta, volvera al menu.");
+            printf("\n\n");
+            system("pause");
             break;
         }
     } while (opcion != 4);

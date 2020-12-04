@@ -5,7 +5,7 @@
 #include<string.h>
 
 //Estructuras:
-struct Fecha
+struct fecha
 {
     int dia;
     int mes;
@@ -33,14 +33,15 @@ struct Mascota
     char domicilio[60];
     int dni_dueño;
     char localidad[60];
-    Fecha fecha_nacimiento;
+    fecha fecha_nacimiento;
+    float peso;
     char telefono[60];
 };
 
 struct Turnos
 {
     int matricula_vet;
-    Fecha fecha_turno;
+    fecha fecha_turno;
     int dni_duenio;
     char detalles_atencion[360];
 };
@@ -50,7 +51,8 @@ void end();
 
 main()
 {
-	
+	Usuarios reg_usuarios[50];
+
 	
 	end();
 }

@@ -31,7 +31,7 @@ struct Mascota
 {
     char ApeyNom[60];
     char domicilio[60];
-    int dni_dueño;
+    int dni_duenio;
     char localidad[60];
     fecha fecha_nacimiento;
     float peso;
@@ -48,7 +48,7 @@ struct Turnos
 
 //Protipos de funciones:
 void end();
-void cargar_registros(Usuarios &reg_usuarios[50],Veterinario &reg_vets[50],Mascota &reg_mascotas[50],Turnos &reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos)
+void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_usuarios,int num_vets,int num_mascotas,int num_turnos);
 
 main()
 {
@@ -63,7 +63,7 @@ main()
 	end();
 }
 
-void cargar_registros(Usuarios &reg_usuarios[50],Veterinario &reg_vets[50],Mascota &reg_mascotas[50],Turnos &reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos)
+void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_usuarios,int num_vets,int num_mascotas,int num_turnos)
 {
     FILE *arch;
     int i = 0;

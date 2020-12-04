@@ -1,5 +1,6 @@
 ### Mis excepciones xd ###
 *.exe
+*.dat
 
 ### Excepciones Ubuntu ###
 *.out

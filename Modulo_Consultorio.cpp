@@ -48,14 +48,44 @@ struct Turnos
 
 //Protipos de funciones:
 void end();
+void cargar_registros(Usuarios &reg_usuarios[50],Veterinario &reg_vets[50],Mascota &reg_mascotas[50],Turnos &reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos)
 
 main()
 {
 	Usuarios reg_usuarios[50];
-
+    Veterinario reg_vets[50];
+    Mascota reg_mascotas[50];
+    Turnos reg_turnos[50];
+    int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0;
+    cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
 	
 	end();
 }
+
+void cargar_registros(Usuarios &reg_usuarios[50],Veterinario &reg_vets[50],Mascota &reg_mascotas[50],Turnos &reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos)
+{
+    FILE *arch;
+    int i = 0;
+     
+    arch=fopen("Usuarios.dat","rb");
+
+    fread(&reg_usuarios[i],sizeof(Usuarios),1,arch);
+    while (!feof(arch))
+    {
+       i++;
+       fread(&reg_usuarios[i],sizeof(Usuarios),1,arch); 
+    }
+    num_usuarios = i;
+    i = 0;
+
+    
+}
+
+
+
+
+
+
 
 
 

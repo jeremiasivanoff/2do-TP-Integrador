@@ -232,8 +232,8 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
         if (buscar_matricula == re_vets[i].matricula_vet)
         {
             strcpy(buscar_ApeyNom,reg_vets[i].ApeyNom);
-            i = num_vets+1;
             esta = true;
+            i = num_vets+1;
         }
     }
     
@@ -256,6 +256,7 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
         if (esta)
         {
             printf("\t\nInicio sesion con exito.");
+            return true;
         }
         else
         {

@@ -52,6 +52,7 @@ void end();
 void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos);
 bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets,int &buscar_matricula);
 void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula);
+void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio);
 
 main()
 {
@@ -274,16 +275,16 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
 
 void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula)
 {
-    int buscar_dia,buscar_mes,buscar_anio;
+    fecha buscar;
     bool esta = false;
 
     printf("\nIngrese la fecha: ")
     printf("\nDia: ");
-    scanf("%d",&buscar_dia);
+    scanf("%d",&buscar.dia);
     printf("\nMes: ");
-    scanf("%d",&buscar_mes);
+    scanf("%d",&buscar.mes);
     printf("\nAnio: ");
-    scanf("%d",&buscar_anio);
+    scanf("%d",&buscar.anio);
 
     for (int i = 0; i < num_turnos; i++)
     {
@@ -292,7 +293,7 @@ void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,in
             if ((buscar_dia == reg_turnos[i].fecha_turno.dia) and (buscar_mes == reg_turnos[i].fecha_turno.mes) and (buscar_anio == reg_turnos[i].fecha_turno.anio))
             {
                 esta = true;
-                mostrar_datos_mascota(reg_mascotas,num_mascotas,reg_turnos[i].dni_duenio);
+                mostrar_datos_mascota(reg_mascotas,num_mascotas,reg_turnos[i].dni_duenio,buscar.anio);
             }   
         }   
     }
@@ -303,8 +304,22 @@ void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,in
     }
 }
 
-void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar_dni_duenio)
+void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio)
 {
-
+    for (int i = 0; i < num_mascotas; i++)
+    {
+        if (buscar_dni_duenio == reg_mascotas[i].dni_duenio)
+        {
+            printf("\n\nApellido (Duenio) y Nombre (Mascota): ");
+            puts(reg_mascotas[i].ApeyNom);
+            printf("\nDNI del duenio: %d",reg_mascotas[i].dni_duenio);
+            printf("\nLocalidad: ");
+            puts(reg_mascotas[i].localidad);
+            printf("\nEdad: %d",(buscar_anio-reg_mascotas[i].fecha_nacimiento.anio));
+            printf("\nPeso: %.2f",reg_mascotas[i].peso);
+            
+            i = num_mascotas+1;
+        }
+    }
 }
 

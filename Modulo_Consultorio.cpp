@@ -44,6 +44,7 @@ struct Turnos
     fecha fecha_turno;
     int dni_duenio;
     char detalles_atencion[360];
+    bool mostrado;
 };
 
 //Protipos de funciones:
@@ -81,7 +82,7 @@ main()
         switch (opcion)
         {
             case 1:
-                inicio = inicio_sesion(reg_usuarios,reg_vets,num_usuarios,num_vets);
+                inicio = inicio_sesion(reg_usuarios,reg_vets,num_usuarios,num_vets,buscar_matricula);
                 printf("\n\n");
                 system("pause");
                 break;
@@ -273,19 +274,27 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
 void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula)
 {
     int buscar_dia,buscar_mes,buscar_anio;
+    bool esta = false;
 
-    printf("\nIngrese el dia: ");
+    printf("\nIngrese la fecha: ")
+    printf("\nDia: ");
     scanf("%d",&buscar_dia);
-    printf("\nIngrese el mes: ");
+    printf("\nMes: ");
     scanf("%d",&buscar_mes);
-    printf("\nIngrese el anio: ");
+    printf("\nAnio: ");
     scanf("%d",&buscar_anio);
 
     for (int i = 0; i < num_turnos; i++)
     {
-        
+        if (buscar_matricula == reg_turnos[i].matricula_vet)
+        {
+            if ((buscar_dia == reg_turnos[i].fecha_turno.dia) and (buscar_mes == reg_turnos[i].fecha_turno.mes) and (buscar_anio == reg_turnos[i].fecha_turno.anio))
+            {
+                esta = true;
+                mostrar_datos_mascota(reg_mascotas,num_mascotas,reg_turnos[i].dni_duenio);
+            }   
+        }   
     }
-    
 }
 
 

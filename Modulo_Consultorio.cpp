@@ -49,7 +49,7 @@ struct Turnos
 //Protipos de funciones:
 void end();
 void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_usuarios,int num_vets,int num_mascotas,int num_turnos);
-bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets);
+bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets,int &buscar_matricula);
 
 main()
 {
@@ -58,7 +58,7 @@ main()
     Mascota reg_mascotas[50];
     Turnos reg_turnos[50];
 
-    int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0;
+    int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0,buscar_matricula;
     int opcion;
     bool inicio = false;
     
@@ -72,9 +72,9 @@ main()
         printf("\t1.- Iniciar Sesion.\n");
         printf("\t2.- Visulizar Lista de Espera de Turnos (Informe).\n");
         printf("\t3.- Registrar Evolucion de la Mascota.");
-        printf("\n");
+        printf("\n\n");
         printf("\t4.- Cerrar la aplicacion.");
-        printf("\n");
+        printf("\n\n");
         printf("\tIngrese una opcion: ");
         scanf("%d",&opcion);
 
@@ -89,7 +89,7 @@ main()
             case 2:
                 if (inicio)
                 {
-                    
+                    listado(reg_mascotas,reg_turnos,buscar_matricula);
                 }
                 else
                 {
@@ -213,9 +213,8 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
     }
 }
 
-bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets)
+bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets,int &buscar_matricula)
 {
-    int buscar_matricula;
     char buscar_contra[10],buscar_ApeyNom[60];
     bool esta = false;
     

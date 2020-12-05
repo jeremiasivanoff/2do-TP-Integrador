@@ -14,7 +14,7 @@ struct veterinario
 struct usuario
 {
 	char usuario[10];
-	char contra[10];
+	char contra[33];
 	char ApeNom[60];
 };
 
@@ -36,6 +36,7 @@ main()
 		{
 			case 1:
 			registrarvet(vete,vet);
+			printf("\n");
 			system("pause");
 			break;
 			case 2:
@@ -50,6 +51,12 @@ main()
 			break;
 			case 5:
 			system("pause");
+			break;
+			case 6:
+			system("CLS");
+			printf("\nFin del Programa\n");
+			system("pause");
+			exit(1);
 			break;
 			
 		}
@@ -78,8 +85,11 @@ void registrarvet(FILE *vet1, veterinario vet)
 
 void registrarusuario(FILE *usuario1, usuario user)
 {
-	int i,v=0,bandera=0,mayus=0,num=0;
+	int i,v=0,bandera=0,mayus=0,num=0,nume=0;
+	int espacio=0,conse=0,cons=0;
+	char ant;
 	system("CLS");
+	usuario1=fopen("Usuarios.dat","ab");
 	printf("\tIngrese los datos del usuario");
 	printf("\nNombre de Usuario: ");
 	_flushall();
@@ -94,31 +104,102 @@ void registrarusuario(FILE *usuario1, usuario user)
 					if(user.usuario[i]>=65 and user.usuario[i]<=90)
 					{
 						mayus++;
-						if(mayus>=2)
-						{
-							printf("\nEl usuario contiene al menos 2 letras mayusculas.");
-							printf("\nUsuario v�lido");
-							break;
-						}
+					
+							if(user.usuario[i]>=48 and user.usuario[i]<=57)
+							{
+								num=num+1;
+							}
 					}
 				}
-				if(mayus==0)
-				{
-					printf("\nNo posee la cantidad minima de mayusculas.");
-				}
+					
+			if(mayus>=2)
+			{
+				printf("\nEl usuario contiene al menos 2 letras mayusculas.\n");
+					if(num<=3)
+					{
+						printf("\nEl Usuario contiene menos 3 digitos");
+						printf("\nUsuario valido");
+						bandera=1;
+						fwrite(&user.usuario,sizeof(usuario),1,usuario1);
+					}
+					else
+						{
+							printf("\nEl usuario no puede tener mas de 3 digitos");
+						}
+						}
+						else
+						{
+							printf("\nNo posee la cantidad minima de mayusculas deben ser al menos 2");
+							printf("\nUsuario invalido");
+						}	
 			}
 			else
 			{
 				printf("\nLa primera letra del usuario debe ser minuscula.");
+				printf("\nUsuario invalido");
 			}
-			
 		}
 		else
 		{
-			printf("\nUsuario inv�lido");
+			printf("\nLa cantidad de caracteres debe ser de 6 a 10");
+			printf("\nUsuario invalido\n");
 		}
-}
+				
 
+		
+		if(bandera==1)
+		{
+			printf("\nIngrese la contrasenia: ");
+			_flushall();
+			gets(user.contra);
+			if(strlen(user.contra)>=6 and strlen(user.contra)<=32)
+			{
+				for(i=0;i<=user.contra[i];i++)
+				{
+				if(user.contra[i]>=40 and user.contra[i]<=47 or user.contra[i]>=58 and user.contra[i]<=63 or user.contra[i]>=90 and user.contra[i]<=96 or user.contra[i]>=123 and user.contra[i]<=126 or user.contra[i]==239)
+				{
+					printf("\nLa contrasenia no puede contener signos de puntuacion o acentos");
+				}
+				else if(user.contra[i]==' ')
+				{
+					espacio=espacio+1;
+					printf("\nLa contrasenia no debe tener espacios");
+				}
+				if(user.contra[i]>=48 and user.contra[i]<=57)
+				{
+					ant=user.contra[i];
+					
+					
+				}
+				}
+			
+			}
+		else
+			{
+				printf("\nLa Contrasenia debe tener entre 6 y 32 caracteres");
+			}
+			if(espacio==0)
+			{
+				if(conse<=3)
+				{
+					if(cons<=2)
+					{
+						printf("\nContrasenia valida");
+						bandera=2;
+					}
+				}
+				else
+				printf("\nLa contrasenia no debe tener mas de 4 numeros consecutivos");
+			}
+	}
+	if(bandera==2)
+	{
+		printf("\nIngrese el Apellido y Nombre del usuario: ");
+		_flushall();
+		gets(user.ApeNom);
+	}
+
+}
 int menuprincipal()
 {
 	int opc=0;

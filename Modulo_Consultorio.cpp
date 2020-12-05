@@ -22,7 +22,7 @@ struct Usuarios
 struct Veterinario
 {
     char ApeyNom[60];
-    int matricula;
+    int matricula_vet;
     int dni;
     char telefono[25];
 };
@@ -49,6 +49,7 @@ struct Turnos
 //Protipos de funciones:
 void end();
 void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_usuarios,int num_vets,int num_mascotas,int num_turnos);
+bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets);
 
 main()
 {
@@ -56,13 +57,13 @@ main()
     Veterinario reg_vets[50];
     Mascota reg_mascotas[50];
     Turnos reg_turnos[50];
+
     int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0;
     int opcion;
-    bool inicio=false;
+    bool inicio = false;
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
 	
-
     do
     {
         system("cls");
@@ -80,8 +81,7 @@ main()
         switch (opcion)
         {
             case 1:
-                
-                inicio=true;
+                inicio = inicio_sesion(reg_usuarios,reg_vets,num_usuarios,num_vets);
                 printf("\n\n");
                 system("pause");
                 break;
@@ -212,4 +212,65 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
         fclose(arch);
     }
 }
+
+bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets)
+{
+    int buscar_matricula;
+    char buscar_contra[10],buscar_ApeyNom[60];
+    bool esta = false;
+    
+    printf("\t\nIngrese su numero de matricula: ");
+    scanf("%d",&buscar_matricula);
+
+    printf("\t\nIngrese su contraseña: ");
+    _flushall();
+    gets(buscar_contra);
+    system("cls");
+
+    for (int i = 0; i < num_vets; i++)
+    {
+        if (buscar_matricula == re_vets[i].matricula_vet)
+        {
+            strcpy(buscar_ApeyNom,reg_vets[i].ApeyNom);
+            i = num_vets+1;
+            esta = true;
+        }
+    }
+    
+    if (esta)
+    {
+        esta = false;
+
+        for (int i = 0; i < num_usuarios; i++)
+        {
+            if (strcmp(buscar_ApeyNom,reg_usuarios[i].ApeyNom) == 0)
+            {
+                if (strcmp(buscar_contra,reg_usuarios[i].contra) == 0)
+                {
+                    esta = true;
+                    i = num_usuarios+1;
+                }
+            }
+        }
+        
+        if (esta)
+        {
+            printf("\t\nInicio sesion con exito.");
+        }
+        else
+        {
+            printf("\t\nEl numero de matricula, o contraseña, es incorrecta, volvera al menu.");
+            return false;
+        }
+    }
+    else
+    {
+        printf("\t\nEl numero de matricula, o contraseña, es incorrecta, volvera al menu.");
+        return false;
+    }
+}
+
+
+
+
 

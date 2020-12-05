@@ -48,7 +48,7 @@ struct Turnos
 
 //Protipos de funciones:
 void end();
-void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_usuarios,int num_vets,int num_mascotas,int num_turnos);
+void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos);
 bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets,int &buscar_matricula);
 
 main()
@@ -127,7 +127,7 @@ main()
     } while (opcion != 4);
 }
 
-void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_usuarios,int num_vets,int num_mascotas,int num_turnos)
+void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos)
 {
     FILE *arch;
     int i = 0;
@@ -270,7 +270,23 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
     }
 }
 
+void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula)
+{
+    int buscar_dia,buscar_mes,buscar_anio;
 
+    printf("\nIngrese el dia: ");
+    scanf("%d",&buscar_dia);
+    printf("\nIngrese el mes: ");
+    scanf("%d",&buscar_mes);
+    printf("\nIngrese el anio: ");
+    scanf("%d",&buscar_anio);
+
+    for (int i = 0; i < num_turnos; i++)
+    {
+        
+    }
+    
+}
 
 
 

@@ -51,8 +51,8 @@ struct Turnos
 void end();
 void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos);
 bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets,int &buscar_matricula);
-void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula);
-void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio);
+void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula);
+void mostrar_datos_mascota(Mascota reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio);
 void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula);
 
 main()
@@ -274,12 +274,12 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
     }
 }
 
-void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula)
+void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula)
 {
     fecha buscar;
     bool esta = false;
 
-    printf("\nIngrese la fecha: ")
+    printf("\nIngrese la fecha: ");
     printf("\nDia: ");
     scanf("%d",&buscar.dia);
     printf("\nMes: ");
@@ -305,7 +305,7 @@ void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,in
     }
 }
 
-void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio)
+void mostrar_datos_mascota(Mascota reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio)
 {
     for (int i = 0; i < num_mascotas; i++)
     {
@@ -327,7 +327,7 @@ void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar
 void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
 {
     fecha buscar;
-    int buscar_bni_duenio;
+    int buscar_dni_duenio;
 
     printf("\nIngrese la fecha del turno: ");
     printf("\nDia: ");

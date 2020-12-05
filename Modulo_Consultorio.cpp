@@ -44,7 +44,7 @@ struct Turnos
     fecha fecha_turno;
     int dni_duenio;
     char detalles_atencion[360];
-    bool mostrado;
+    bool mostrado = false;
 };
 
 //Protipos de funciones:

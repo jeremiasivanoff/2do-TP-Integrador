@@ -53,6 +53,7 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
 bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets,int &buscar_matricula);
 void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula);
 void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio);
+void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula);
 
 main()
 {
@@ -61,7 +62,7 @@ main()
     Mascota reg_mascotas[50];
     Turnos reg_turnos[50];
 
-    int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0,buscar_matricula;
+    int num_usuarios = 0,num_vets = 0,num_mascotas = 0,num_turnos = 0,buscar_matricula = 0;
     int opcion;
     bool inicio = false;
     
@@ -92,7 +93,7 @@ main()
             case 2:
                 if (inicio)
                 {
-                    listado(reg_mascotas,reg_turnos,buscar_matricula);
+                    listado(reg_mascotas,reg_turnos,num_mascotas,num_turnos,buscar_matricula);
                 }
                 else
                 {
@@ -105,7 +106,7 @@ main()
             case 3:
                 if (inicio)
                 {
-                    
+                    registar_evolucion(reg_turnos,num_turnos,buscar_matricula);
                 }
                 else
                 {
@@ -290,7 +291,7 @@ void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,in
     {
         if ((buscar_matricula == reg_turnos[i].matricula_vet) and (reg_turnos[i].mostrado == false))
         {
-            if ((buscar_dia == reg_turnos[i].fecha_turno.dia) and (buscar_mes == reg_turnos[i].fecha_turno.mes) and (buscar_anio == reg_turnos[i].fecha_turno.anio))
+            if ((buscar.dia == reg_turnos[i].fecha_turno.dia) and (buscar.mes == reg_turnos[i].fecha_turno.mes) and (buscar.anio == reg_turnos[i].fecha_turno.anio))
             {
                 esta = true;
                 mostrar_datos_mascota(reg_mascotas,num_mascotas,reg_turnos[i].dni_duenio,buscar.anio);
@@ -323,3 +324,41 @@ void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar
     }
 }
 
+void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
+{
+    fecha buscar;
+    int buscar_bni_duenio;
+
+    printf("\nIngrese la fecha del turno: ");
+    printf("\nDia: ");
+    scanf("%d",&buscar.dia);
+    printf("\nMes: ");
+    scanf("%d",&buscar.mes);
+    printf("\nAnio: ");
+    scanf("%d",&buscar.anio);
+
+    printf("\nIngrese el DNI del duenio: ");
+    scanf("%d",&buscar_dni_duenio);
+
+    
+    for (int i = 0; i < num_turnos; i++)
+    {
+        if ((matricula == reg_turnos[i].matricula_vet) and (reg_turnos[i].mostrado == false))
+        {
+            if ((buscar.dia == reg_turnos[i].fecha_turno.dia) and (buscar.mes == reg_turnos[i].fecha_turno.mes) and (buscar.anio == reg_turnos[i].fecha_turno.anio))
+            {
+                if (buscar_dni_duenio == reg_turnos[i].dni_duenio)
+                {
+                    reg_turnos[i].mostrado = true;
+                    system("cls");
+                    printf("\nIngrese los detalles de la atencion (Maximo 380 caracteres, incluidos espacios):\n");
+                    printf("\t-> ");
+                    _flushall();
+                    gets(reg_turnos[i].detalles_atencion);
+                    
+                    i = num_turnos + 1;
+                }
+            }   
+        }   
+    }
+}

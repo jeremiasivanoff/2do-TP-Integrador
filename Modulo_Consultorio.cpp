@@ -229,7 +229,7 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
 
     for (int i = 0; i < num_vets; i++)
     {
-        if (buscar_matricula == re_vets[i].matricula_vet)
+        if (buscar_matricula == reg_vets[i].matricula_vet)
         {
             strcpy(buscar_ApeyNom,reg_vets[i].ApeyNom);
             esta = true;

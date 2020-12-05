@@ -51,6 +51,7 @@ struct Turnos
 void end();
 void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota reg_mascotas[50],Turnos reg_turnos[50],int &num_usuarios,int &num_vets,int &num_mascotas,int &num_turnos);
 bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_usuarios,int num_vets,int &buscar_matricula);
+void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula);
 
 main()
 {
@@ -286,7 +287,7 @@ void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,in
 
     for (int i = 0; i < num_turnos; i++)
     {
-        if (buscar_matricula == reg_turnos[i].matricula_vet)
+        if ((buscar_matricula == reg_turnos[i].matricula_vet) and (reg_turnos[i].mostrado == false))
         {
             if ((buscar_dia == reg_turnos[i].fecha_turno.dia) and (buscar_mes == reg_turnos[i].fecha_turno.mes) and (buscar_anio == reg_turnos[i].fecha_turno.anio))
             {
@@ -295,7 +296,15 @@ void listado(Mascotas reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,in
             }   
         }   
     }
+
+    if (!esta)
+    {
+        printf("\nNo se encontraron turno para la fecha ingresada.");
+    }
 }
 
+void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar_dni_duenio)
+{
 
+}
 

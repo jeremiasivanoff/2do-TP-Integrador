@@ -236,7 +236,7 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
         {
             strcpy(buscar_ApeyNom,reg_vets[i].ApeyNom);
             esta = true;
-            i = num_vets+1;
+            i = num_vets + 1;
         }
     }
     
@@ -251,7 +251,7 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
                 if (strcmp(buscar_contra,reg_usuarios[i].contra) == 0)
                 {
                     esta = true;
-                    i = num_usuarios+1;
+                    i = num_usuarios + 1;
                 }
             }
         }
@@ -319,7 +319,7 @@ void mostrar_datos_mascota(Mascotas reg_mascotas[50],int num_mascotas,int buscar
             printf("\nEdad: %d",(buscar_anio-reg_mascotas[i].fecha_nacimiento.anio));
             printf("\nPeso: %.2f",reg_mascotas[i].peso);
             
-            i = num_mascotas+1;
+            i = num_mascotas + 1;
         }
     }
 }

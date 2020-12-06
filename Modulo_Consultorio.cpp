@@ -68,6 +68,8 @@ main()
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
 	
+    system("pause");    //Prueba, eliminar
+
     do
     {
         system("cls");
@@ -136,42 +138,45 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
     FILE *arch;
     int i = 0;
     
-    //Archivo de usuarios:
-    arch=fopen("Usuarios.dat","rb");
-    
-    if (arch==NULL)
-    {
-        printf("\nEl archivo no fue creado o se elimino, contacte con soporte.");
-    }
-    else
-    {
-        fread(&reg_usuarios[i],sizeof(Usuarios),1,arch);
-        while (!feof(arch))
-        {
-        i++;
-        fread(&reg_usuarios[i],sizeof(Usuarios),1,arch); 
-        }
-        num_usuarios = i;
-        i = 0;
-        fclose(arch);
-    }
-    
     //Archivo de veterinarios:
     arch=fopen("Veterinarios.dat","rb");
 
     if (arch==NULL)
     {
-        printf("\nEl archivo no fue creado o se elimino, contacte con soporte.");
+        printf("\nEl archivo 'Veterinarios.dat' no fue creado o se elimino, contacte con soporte.");
     }
     else
     {
         fread(&reg_vets[i],sizeof(Veterinario),1,arch);
         while (!feof(arch))
         {
-        i++;
-        fread(&reg_vets[i],sizeof(Veterinario),1,arch); 
+            i++;
+            fread(&reg_vets[i],sizeof(Veterinario),1,arch);
         }
         num_vets = i;
+        i = 0;
+        fclose(arch);
+    }
+
+    //Archivo de usuarios:
+    arch=fopen("Usuarios.dat","rb");
+    
+    if (arch==NULL)
+    {
+        printf("\nEl archivo 'Usuarios.dat' no fue creado o se elimino, contacte con soporte.");
+    }
+    else
+    {
+        Usuarios aux2;
+        fread(&aux2,sizeof(Usuarios),1,arch);
+        while (!feof(arch))
+        {
+            printf("\nContra: %s",aux2.contra); //prueba, elimnar
+            reg_usuarios[i] = aux2;
+            i++;
+            fread(&reg_usuarios[i],sizeof(Usuarios),1,arch); 
+        }
+        num_usuarios = i;
         i = 0;
         fclose(arch);
     }
@@ -181,15 +186,15 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
 
     if (arch==NULL)
     {
-        printf("\nEl archivo no fue creado o se elimino, contacte con soporte.");
+        printf("\nEl archivo 'Mascotas.dat' no fue creado o se elimino, contacte con soporte.");
     }
     else
     {
         fread(&reg_mascotas[i],sizeof(Mascota),1,arch);
         while (!feof(arch))
         {
-        i++;
-        fread(&reg_mascotas[i],sizeof(Mascota),1,arch); 
+            i++;
+            fread(&reg_mascotas[i],sizeof(Mascota),1,arch); 
         }
         num_mascotas = i;
         i = 0;
@@ -201,15 +206,15 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
 
     if (arch==NULL)
     {
-        printf("\nEl archivo no fue creado o se elimino, contacte con soporte.");
+        printf("\nEl archivo 'Turnos.dat' no fue creado o se elimino, contacte con soporte.");
     }
     else
     {
         fread(&reg_turnos[i],sizeof(Turnos),1,arch);
         while (!feof(arch))
         {
-        i++;
-        fread(&reg_turnos[i],sizeof(Turnos),1,arch); 
+            i++;
+            fread(&reg_turnos[i],sizeof(Turnos),1,arch); 
         }
         num_turnos = i;
         i = 0;
@@ -236,6 +241,7 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
         {
             strcpy(buscar_ApeyNom,reg_vets[i].ApeyNom);
             esta = true;
+            printf("\nMatricula Correcta"); //Prueba, eliminar
             i = num_vets + 1;
         }
     }

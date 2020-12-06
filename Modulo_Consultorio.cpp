@@ -15,7 +15,7 @@ struct fecha
 struct Usuarios
 {
     char user[10];
-    char contra[10];
+    char contra[33];
     char ApeyNom[60];
 };
 

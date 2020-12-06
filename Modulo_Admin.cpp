@@ -50,9 +50,6 @@ main()
 			system("pause");
 			break;
 			case 5:
-			system("pause");
-			break;
-			case 6:
 			system("CLS");
 			printf("\nFin del Programa\n");
 			system("pause");
@@ -167,36 +164,52 @@ void registrarusuario(FILE *usuario1, usuario user)
 				}
 				if(user.contra[i]>=48 and user.contra[i]<=57)
 				{
-					ant=user.contra[i];
-					
+					if(user.contra[i]+1==user.contra[i+1])
+					{
+						conse=conse+1;
+					}
 					
 				}
+				if(user.contra[i]>=65 and user.contra[i]<=90 or user.contra[i]>=97 and user.contra[i]<=122)
+				{
+					if(user.contra[i]<user.contra[i+1])
+					{
+						cons=cons+1;
+					}
 				}
 			
-			}
-		else
-			{
-				printf("\nLa Contrasenia debe tener entre 6 y 32 caracteres");
-			}
+				}
+	
 			if(espacio==0)
 			{
-				if(conse<=3)
+				if(conse<3)
 				{
-					if(cons<=2)
+					if(cons<1)
 					{
 						printf("\nContrasenia valida");
 						bandera=2;
+						fwrite(&user.contra,sizeof(usuario),1,usuario1);
+					}
+					else
+					{
+						printf("\nLa contrasenia no puede tener dos letras seguidas");
 					}
 				}
 				else
 				printf("\nLa contrasenia no debe tener mas de 4 numeros consecutivos");
 			}
-	}
+		}
+			else
+			{
+				printf("\nLa Contrasenia debe tener entre 6 y 32 caracteres");
+			}
+		}
 	if(bandera==2)
 	{
 		printf("\nIngrese el Apellido y Nombre del usuario: ");
 		_flushall();
 		gets(user.ApeNom);
+		fwrite(&user.ApeNom,sizeof(usuario),1,usuario1);
 	}
 
 }
@@ -210,8 +223,7 @@ int menuprincipal()
 	printf("\n2.- Registrar Usuario Asistente");
 	printf("\n3.- Atenciones por Veterinarios");
 	printf("\n4.- Ranking de Veterinarios por atenciones");
-	printf("\n5.- Registrar Veterinario");
-	printf("\n6.- Cerrar Aplicacion");
+	printf("\n5.- Cerrar Aplicacion");
 	printf("\nSeleccione una opcion: ");
 	scanf("%d",&opc);
 	return opc;

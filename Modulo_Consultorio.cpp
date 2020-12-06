@@ -54,6 +54,7 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
 void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula);
 void mostrar_datos_mascota(Mascota reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio);
 void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula);
+void guardar_archivo(Trunos reg_turnos[50],int num_turnos);
 
 main()
 {
@@ -73,15 +74,15 @@ main()
     do
     {
         system("cls");
-        printf("\t\tModulo Consultorio Veterinario\n");
-        printf("\t\t==============================\n");
-        printf("\t1.- Iniciar Sesion.\n");
-        printf("\t2.- Visulizar Lista de Espera de Turnos (Informe).\n");
-        printf("\t3.- Registrar Evolucion de la Mascota.");
+        printf("Modulo Consultorio Veterinario\n");
+        printf("==============================\n");
+        printf("1.- Iniciar Sesion.\n");
+        printf("2.- Visulizar Lista de Espera de Turnos (Informe).\n");
+        printf("3.- Registrar Evolucion de la Mascota.");
         printf("\n\n");
-        printf("\t4.- Cerrar la aplicacion.");
+        printf("4.- Cerrar la aplicacion.");
         printf("\n\n");
-        printf("\tIngrese una opcion: ");
+        printf("Ingrese una opcion: ");
         scanf("%d",&opcion);
 
         switch (opcion)
@@ -119,7 +120,8 @@ main()
                 break;
 
             case 4:
-                printf("\n\tGracias por utilizar el programa.");
+                guardar_archivo(reg_turnos,num_turnos);
+                printf("\nGracias por utilizar el programa.");
                 printf("\n\n");
                 system("pause");
                 break;
@@ -167,12 +169,15 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
     }
     else
     {
-        Usuarios aux2;
-        fread(&aux2,sizeof(Usuarios),1,arch);
+        fread(&reg_usuarios[i],sizeof(Usuarios),1,arch);
         while (!feof(arch))
         {
-            printf("\nContra: %s",aux2.contra); //prueba, elimnar
-            reg_usuarios[i] = aux2;
+            printf("\nUsuario: %s",reg_usuarios[i].user);      //prueba, elimnar
+            printf("\nContra: %s",reg_usuarios[i].contra);     //prueba, elimnar
+            printf("\nApellido y Nombre:    ");    //prueba, elimnar
+            puts(reg_usuarios[i].ApeyNom);
+            printf("\n----------------------------------");    //prueba, elimnar
+
             i++;
             fread(&reg_usuarios[i],sizeof(Usuarios),1,arch); 
         }
@@ -227,10 +232,10 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
     char buscar_contra[10],buscar_ApeyNom[60];
     bool esta = false;
     
-    printf("\t\nIngrese su numero de matricula: ");
+    printf("\nIngrese su numero de matricula: ");
     scanf("%d",&buscar_matricula);
 
-    printf("\t\nIngrese su contraseña: ");
+    printf("\nIngrese su contraseña: ");
     _flushall();
     gets(buscar_contra);
     system("cls");
@@ -264,18 +269,18 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
         
         if (esta)
         {
-            printf("\t\nInicio sesion con exito.");
+            printf("\nInicio sesion con exito.");
             return true;
         }
         else
         {
-            printf("\t\nEl numero de matricula, o contraseña, es incorrecta, volvera al menu.");
+            printf("\nEl numero de matricula, o contraseña, es incorrecta, volvera al menu.");
             return false;
         }
     }
     else
     {
-        printf("\t\nEl numero de matricula, o contraseña, es incorrecta, volvera al menu.");
+        printf("\nEl numero de matricula, o contraseña, es incorrecta, volvera al menu.");
         return false;
     }
 }
@@ -366,5 +371,16 @@ void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
                 }
             }   
         }   
+    }
+}
+
+void guardar_archivo(Trunos reg_turnos[50],int num_turnos)
+{
+    FILE *arch;
+    arch =  fopen("Turnos.dat","w+b");
+
+    for (int i = 0; i < num_turos; i++)
+    {
+        fwrite(&reg_turnos[i],sizeof(Turnos),1,arch);
     }
 }

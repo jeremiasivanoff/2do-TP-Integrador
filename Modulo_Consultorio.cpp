@@ -54,7 +54,7 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
 void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int num_turnos,int buscar_matricula);
 void mostrar_datos_mascota(Mascota reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio);
 void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula);
-void guardar_archivo(Trunos reg_turnos[50],int num_turnos);
+void guardar_archivo(Turnos reg_turnos[50],int num_turnos);
 
 main()
 {
@@ -374,12 +374,12 @@ void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
     }
 }
 
-void guardar_archivo(Trunos reg_turnos[50],int num_turnos)
+void guardar_archivo(Turnos reg_turnos[50],int num_turnos)
 {
     FILE *arch;
     arch =  fopen("Turnos.dat","w+b");
 
-    for (int i = 0; i < num_turos; i++)
+    for (int i = 0; i < num_turnos; i++)
     {
         fwrite(&reg_turnos[i],sizeof(Turnos),1,arch);
     }

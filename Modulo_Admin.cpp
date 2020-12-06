@@ -117,7 +117,7 @@ void registrarusuario(FILE *usuario1, usuario user)
 						printf("\nEl Usuario contiene menos 3 digitos");
 						printf("\nUsuario valido");
 						bandera=1;
-						fwrite(&user.usuario,sizeof(usuario),1,usuario1);
+						//fwrite(&user.usuario,sizeof(usuario),1,usuario1);
 					}
 					else
 						{
@@ -188,7 +188,7 @@ void registrarusuario(FILE *usuario1, usuario user)
 					{
 						printf("\nContrasenia valida");
 						bandera=2;
-						fwrite(&user.contra,sizeof(usuario),1,usuario1);
+						//fwrite(&user.contra,sizeof(usuario),1,usuario1);
 					}
 					else
 					{
@@ -209,7 +209,8 @@ void registrarusuario(FILE *usuario1, usuario user)
 		printf("\nIngrese el Apellido y Nombre del usuario: ");
 		_flushall();
 		gets(user.ApeNom);
-		fwrite(&user.ApeNom,sizeof(usuario),1,usuario1);
+		//fwrite(&user.ApeNom,sizeof(usuario),1,usuario1);
+		fwrite(&user,sizeof(usuario),1,usuario1);
 	}
 
 	fclose(usuario1);

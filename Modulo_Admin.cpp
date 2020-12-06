@@ -6,7 +6,7 @@
 struct veterinario
 {
 	char ApeNom[60];
-	int matricula;
+	int matricula_vet;
 	int dni;
 	char telefono[25];
 };
@@ -64,13 +64,13 @@ main()
 void registrarvet(FILE *vet1, veterinario vet)
 {
 	system("CLS");
-	vet1=fopen("Veterinario.dat","ab");
+	vet1=fopen("Veterinarios.dat","ab");
 	printf("\tIngrese los datos del veterinario ");
 	printf("\nIngrese el nombre del veterinario: ");
 	_flushall();
 	gets(vet.ApeNom);
 	printf("\nIngrese su matricula: ");
-	scanf("%d",&vet.matricula);
+	scanf("%d",&vet.matricula_vet);
 	printf("\nIngrese su dni: ");
 	scanf("%d",&vet.dni);
 	printf("\nIngrese su numero de telefono: ");
@@ -212,6 +212,7 @@ void registrarusuario(FILE *usuario1, usuario user)
 		fwrite(&user.ApeNom,sizeof(usuario),1,usuario1);
 	}
 
+	fclose(usuario1);
 }
 int menuprincipal()
 {

@@ -41,6 +41,7 @@ struct Turnos
 int menuprincipal();
 void regmascota(FILE *mascot1,Mascota mcota);
 void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter);
+void listaten(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter);
 
 main()
 {
@@ -79,7 +80,7 @@ main()
 				break;
 			case 4:
 				system("cls");
-				
+				listaten(turno,tur,vet,veter);
 				system("pause");
 				system("cls");
 				break;
@@ -205,6 +206,34 @@ void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter)
 		fwrite(&tur,sizeof(Turnos),1,turno1);
 	}
 	
+	fclose(turno1);
+	fclose(vet1);
+}
+
+void listaten(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter)
+{
+	turno1=fopen("Turnos.dat","rb");
+	vet1=fopen("Veterinarios.dat","rb");
+	
+	fread(&tur,sizeof(Turnos),1,turno1);
+    fread(&veter,sizeof(Veterinario),1,vet1);
+	
+	printf("\nListado de atenciones");
+	printf("\nVeterinario");
+	printf("\t\tFecha del turno");
+	printf("\n===========================================");
+	
+	while(!feof(turno1))
+	{
+		printf("\n\n");
+		if(tur.matricula_vet==veter.matricula_vet)
+		{
+			printf("%s",veter.ApeyNom);
+			printf("\t\t%d/%d/%d",tur.fecha_turno.dia,tur.fecha_turno.mes,tur.fecha_turno.anio);
+		}
+		fread(&tur,sizeof(Turnos),1,turno1);
+    	fread(&veter,sizeof(Veterinario),1,vet1);		
+	}
 	fclose(turno1);
 	fclose(vet1);
 }

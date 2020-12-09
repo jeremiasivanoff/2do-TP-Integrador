@@ -201,7 +201,7 @@ void regmascota(FILE *mascot1,Mascota mcota,bool &verificacion)
 		scanf("%d",&mcota.fecha_nacimiento.mes);
 		printf("\nIngrese el anio: ");
 		scanf("%d",&mcota.fecha_nacimiento.anio);
-		printf("\Ingrese el peso de la mascota en KG: ");
+		printf("\nIngrese el peso de la mascota en KG: ");
 		scanf("%d",&mcota.peso);
 		printf("\nIngrese el telefono del duenio: ");
 		_flushall();

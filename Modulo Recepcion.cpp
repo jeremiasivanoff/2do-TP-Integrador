@@ -31,13 +31,15 @@ struct Turnos
 
 int menuprincipal();
 void regmascota(FILE *mascot1,Mascota mcota);
+void regturnos(FILE *turno1,Turnos tur);
+
 main()
 {
 	setlocale(LC_ALL,"spanish");
 	FILE *mascot;
 	FILE *turno;
 	Mascota mcota;
-	Turnos tur[20];
+	Turnos tur;
 	
 	int op;
 	
@@ -60,7 +62,7 @@ main()
 				break;
 			case 3:
 				system("cls");
-				
+				regturnos(turno,tur);
 				system("pause");
 				system("cls");
 				break;
@@ -109,7 +111,6 @@ int menuprincipal()
 
 void regmascota(FILE *mascot1,Mascota mcota)
 {
-	int i;
 	mascot1=fopen("Mascotas.dat","ab");
 	
 	printf("\nIngrese el nombre de la mascota: ");
@@ -137,4 +138,28 @@ void regmascota(FILE *mascot1,Mascota mcota)
 	
 	fwrite(&mcota,sizeof(Mascota),1,mascot1);
 	fclose(mascot1);
+}
+
+void regturnos(FILE *turno1,Turnos tur)
+{
+	turno1=fopen("Turnos.dat","ab");
+	
+	printf("Ingrese la matricula del veterinario: ");
+	scanf("%d",&tur.matricula_vet);
+	printf("Ingrese el DNI del duenio: ");
+	scanf("%d",&tur.dni_duenio);
+	printf("\nIngrese la fecha del turno.");
+	printf("\nIngrese el dia: ");
+	scanf("%d",&tur.fecha_turno.dia);
+	printf("\nIngrese el mes: ");
+	scanf("%d",&tur.fecha_turno.mes);
+	printf("\nIngrese el anio: ");
+	scanf("%d",&tur.fecha_turno.anio);
+	printf("\nIngrese detalles sobre la mascota y la atencion realizada por el veterinario: ");
+	_flushall();
+	gets(tur.detalles_atencion);
+	printf("\n======Turno registrado======.");
+	
+	fwrite(&tur,sizeof(Turnos),1,turno1);
+	fclose(turno1);
 }

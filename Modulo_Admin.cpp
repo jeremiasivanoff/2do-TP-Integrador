@@ -214,6 +214,9 @@ void registrarusuario(FILE *usuario1, usuario user)
 
 	fclose(usuario1);
 }
+	
+	
+
 int menuprincipal()
 {
 	int opc=0;

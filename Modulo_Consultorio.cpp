@@ -15,7 +15,7 @@ struct fecha
 struct Usuarios
 {
     char user[10];
-    char contra[10];
+    char contra[33];
     char ApeyNom[60];
 };
 
@@ -44,7 +44,7 @@ struct Turnos
     fecha fecha_turno;
     int dni_duenio;
     char detalles_atencion[360];
-    bool mostrado = false;
+    bool mostrado;
 };
 
 //Protipos de funciones:
@@ -172,12 +172,6 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
         fread(&reg_usuarios[i],sizeof(Usuarios),1,arch);
         while (!feof(arch))
         {
-            printf("\nUsuario: %s",reg_usuarios[i].user);      //prueba, elimnar
-            printf("\nContra: %s",reg_usuarios[i].contra);     //prueba, elimnar
-            printf("\nApellido y Nombre:    ");    //prueba, elimnar
-            puts(reg_usuarios[i].ApeyNom);
-            printf("\n----------------------------------");    //prueba, elimnar
-
             i++;
             fread(&reg_usuarios[i],sizeof(Usuarios),1,arch); 
         }
@@ -246,7 +240,6 @@ bool inicio_sesion(Usuarios reg_usuarios[50],Veterinario reg_vets[50],int num_us
         {
             strcpy(buscar_ApeyNom,reg_vets[i].ApeyNom);
             esta = true;
-            printf("\nMatricula Correcta"); //Prueba, eliminar
             i = num_vets + 1;
         }
     }

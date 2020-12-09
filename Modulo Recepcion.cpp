@@ -35,6 +35,7 @@ struct Turnos
 	fecha fecha_turno;
 	int dni_duenio;
 	char detalles_atencion[380];
+	bool mostrado;
 };
 
 int menuprincipal();
@@ -198,6 +199,7 @@ void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter)
 		printf("\nIngrese detalles sobre la mascota y la atencion realizada por el veterinario: ");
 		_flushall();
 		gets(tur.detalles_atencion);
+		tur.mostrado==false;
 		printf("\n======Turno registrado======.");
 		
 		fwrite(&tur,sizeof(Turnos),1,turno1);

@@ -10,6 +10,14 @@ struct fecha
 	int anio;
 };
 
+struct Veterinario
+{
+    char ApeyNom[60];
+    int matricula_vet;
+    int dni;
+    char telefono[25];
+};
+
 struct Mascota
 {
 	char ApeyNom[60];
@@ -31,15 +39,17 @@ struct Turnos
 
 int menuprincipal();
 void regmascota(FILE *mascot1,Mascota mcota);
-void regturnos(FILE *turno1,Turnos tur);
+void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter);
 
 main()
 {
 	setlocale(LC_ALL,"spanish");
 	FILE *mascot;
 	FILE *turno;
+	FILE *vet;
 	Mascota mcota;
 	Turnos tur;
+	Veterinario veter;
 	
 	int op;
 	
@@ -62,7 +72,7 @@ main()
 				break;
 			case 3:
 				system("cls");
-				regturnos(turno,tur);
+				regturnos(turno,tur,vet,veter);
 				system("pause");
 				system("cls");
 				break;
@@ -140,26 +150,59 @@ void regmascota(FILE *mascot1,Mascota mcota)
 	fclose(mascot1);
 }
 
-void regturnos(FILE *turno1,Turnos tur)
+void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter)
 {
+	int b=1;
+	
 	turno1=fopen("Turnos.dat","ab");
+	vet1=fopen("Veterinarios.dat","rb");
+	
+	if(vet1==NULL)
+	{
+		system("cls");
+		printf("\nERROR,No se encontro el archivo veterinarios.Contacte con el soporte");
+		exit(1);
+	}
 	
 	printf("Ingrese la matricula del veterinario: ");
 	scanf("%d",&tur.matricula_vet);
-	printf("Ingrese el DNI del duenio: ");
-	scanf("%d",&tur.dni_duenio);
-	printf("\nIngrese la fecha del turno.");
-	printf("\nIngrese el dia: ");
-	scanf("%d",&tur.fecha_turno.dia);
-	printf("\nIngrese el mes: ");
-	scanf("%d",&tur.fecha_turno.mes);
-	printf("\nIngrese el anio: ");
-	scanf("%d",&tur.fecha_turno.anio);
-	printf("\nIngrese detalles sobre la mascota y la atencion realizada por el veterinario: ");
-	_flushall();
-	gets(tur.detalles_atencion);
-	printf("\n======Turno registrado======.");
+	fread(&veter,sizeof(Veterinario),1,vet1);
+	while(!feof(vet1) and b==0)
+	{
+		if(tur.matricula_vet!=veter.matricula_vet)
+		{
+			b=0;
+			fread(&veter,sizeof(Veterinario),1,vet1);
+		}
+		else
+		{
+			b=1;
+		}
+	}
 	
-	fwrite(&tur,sizeof(Turnos),1,turno1);
+	if(b==0)
+	{
+		printf("\nMatricula de veterinario no encontrada.");
+	}
+	else
+	{
+		printf("Ingrese el DNI del duenio: ");
+		scanf("%d",&tur.dni_duenio);
+		printf("\nIngrese la fecha del turno.");
+		printf("\nIngrese el dia: ");
+		scanf("%d",&tur.fecha_turno.dia);
+		printf("\nIngrese el mes: ");
+		scanf("%d",&tur.fecha_turno.mes);
+		printf("\nIngrese el anio: ");
+		scanf("%d",&tur.fecha_turno.anio);
+		printf("\nIngrese detalles sobre la mascota y la atencion realizada por el veterinario: ");
+		_flushall();
+		gets(tur.detalles_atencion);
+		printf("\n======Turno registrado======.");
+		
+		fwrite(&tur,sizeof(Turnos),1,turno1);
+	}
+	
 	fclose(turno1);
+	fclose(vet1);
 }

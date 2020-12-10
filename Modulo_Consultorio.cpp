@@ -69,7 +69,7 @@ main()
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
 	
-    system("pause");    //Prueba, eliminar
+    system("pause"); //prueba, eliminar;
 
     do
     {
@@ -212,6 +212,13 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
         fread(&reg_turnos[i],sizeof(Turnos),1,arch);
         while (!feof(arch))
         {
+            //prueba, eliminar
+            printf("\nmatricula: %d",reg_turnos[i].matricula_vet);
+            printf("\n%d/%d/%d",reg_turnos[i].fecha_turno.dia,reg_turnos[i].fecha_turno.mes,reg_turnos[i].fecha_turno.anio);
+            printf("\ndni duenio: %d",reg_turnos[i].dni_duenio);
+            printf("\nmostrado %d\n",reg_turnos[i].mostrado);
+            //-----
+
             i++;
             fread(&reg_turnos[i],sizeof(Turnos),1,arch); 
         }
@@ -293,12 +300,22 @@ void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int
 
     for (int i = 0; i < num_turnos; i++)
     {
-        if ((buscar_matricula == reg_turnos[i].matricula_vet) and (reg_turnos[i].mostrado == false))
+        printf("\nmatricula: %d",buscar_matricula); //prueba, borrar
+        if ((buscar_matricula == reg_turnos[i].matricula_vet) and reg_turnos[i].mostrado)
         {
+            printf("\nPaso el primer if"); //prueba, borrar
             if ((buscar.dia == reg_turnos[i].fecha_turno.dia) and (buscar.mes == reg_turnos[i].fecha_turno.mes) and (buscar.anio == reg_turnos[i].fecha_turno.anio))
             {
+                printf("\nPaso el segundo if"); //prueba, borrar
+                
                 esta = true;
-                mostrar_datos_mascota(reg_mascotas,num_mascotas,reg_turnos[i].dni_duenio,buscar.anio);
+                printf("\n\nApellido (Duenio) y Nombre (Mascota): ");
+                puts(reg_mascotas[i].ApeyNom);
+                printf("DNI del duenio: %d",reg_mascotas[i].dni_duenio);
+                printf("\nLocalidad: ");
+                puts(reg_mascotas[i].localidad);
+                printf("Edad: %d",(buscar.anio-reg_mascotas[i].fecha_nacimiento.anio));
+                printf("\nPeso: %.2f",reg_mascotas[i].peso);
             }   
         }   
     }
@@ -306,25 +323,6 @@ void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int
     if (!esta)
     {
         printf("\nNo se encontraron turno para la fecha ingresada.");
-    }
-}
-
-void mostrar_datos_mascota(Mascota reg_mascotas[50],int num_mascotas,int buscar_dni_duenio,int buscar_anio)
-{
-    for (int i = 0; i < num_mascotas; i++)
-    {
-        if (buscar_dni_duenio == reg_mascotas[i].dni_duenio)
-        {
-            printf("\n\nApellido (Duenio) y Nombre (Mascota): ");
-            puts(reg_mascotas[i].ApeyNom);
-            printf("\nDNI del duenio: %d",reg_mascotas[i].dni_duenio);
-            printf("\nLocalidad: ");
-            puts(reg_mascotas[i].localidad);
-            printf("\nEdad: %d",(buscar_anio-reg_mascotas[i].fecha_nacimiento.anio));
-            printf("\nPeso: %.2f",reg_mascotas[i].peso);
-            
-            i = num_mascotas + 1;
-        }
     }
 }
 
@@ -347,7 +345,7 @@ void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
     
     for (int i = 0; i < num_turnos; i++)
     {
-        if ((matricula == reg_turnos[i].matricula_vet) and (reg_turnos[i].mostrado == false))
+        if ((matricula == reg_turnos[i].matricula_vet) and !reg_turnos[i].mostrado)
         {
             if ((buscar.dia == reg_turnos[i].fecha_turno.dia) and (buscar.mes == reg_turnos[i].fecha_turno.mes) and (buscar.anio == reg_turnos[i].fecha_turno.anio))
             {

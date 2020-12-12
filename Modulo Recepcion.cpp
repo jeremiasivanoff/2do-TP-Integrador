@@ -142,22 +142,8 @@ void iniciosesion(FILE *usuario1,Usuario user,bool &verificacion)
 	
 	printf("\nIngrese el nombre de usuario: ");
 	_flushall();
-<<<<<<< HEAD
-	gets(mcota.localidad);
-	printf("\nIngrese la fecha de nacimiento de la mascota.");
-	printf("\nIngrese el dia: ");
-	scanf("%d",&mcota.fecha_nacimiento.dia);
-	printf("\nIngrese el mes: ");
-	scanf("%d",&mcota.fecha_nacimiento.mes);
-	printf("\nIngrese el anio: ");
-	scanf("%d",&mcota.fecha_nacimiento.anio);
-	printf("\nIngrese el peso de la mascota en KG: ");
-	scanf("%d",&mcota.peso);
-	printf("\nIngrese el telefono del duenio: ");
-=======
 	gets(ingusuario);
 	printf("\nIngrese la contrasenia: ");
->>>>>>> 6bd06bd0391d0055550d06af44016a81cdbc10b1
 	_flushall();
 	gets(ingcontra);
 	

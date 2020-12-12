@@ -75,6 +75,9 @@ main()
 			system("pause");
 			exit(1);
 			break;
+			default:
+			printf("Error eligio una opcion no existente\n");
+			system("pause");
 			
 		}
 	}while(op!=5);
@@ -243,9 +246,9 @@ void atenciones(FILE *tur1, Turnos tur)
 	printf("\nIngrese el mes para mostrar las atenciones: ");
 	scanf("%d",&mes);
 	fread(&tur,sizeof(Turnos),1,tur1);
-	while(feof(tur1))
+	while(!feof(tur1))
 	{
-		if(mes==tur.fecha_turno.mes)
+		if((mes==tur.fecha_turno.mes) and (tur.mostrado==1))
 		{
 		printf("\nMatricula: %d",tur.matricula_vet);
 		printf("\nFecha\n");
@@ -253,6 +256,8 @@ void atenciones(FILE *tur1, Turnos tur)
 		printf("\nMes: %d",tur.fecha_turno.mes);
 		printf("\nAnio: %d",tur.fecha_turno.anio);
 		printf("\nDNI del duenio: %d",tur.dni_duenio);
+		printf("\nDetalles de atencion: %s\n",tur.detalles_atencion);
+		printf("===========================================\n");
 		}
 		fread(&tur,sizeof(Turnos),1,tur1);
 	}

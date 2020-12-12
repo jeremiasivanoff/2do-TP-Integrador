@@ -18,6 +18,22 @@ struct usuario
 	char ApeNom[60];
 };
 
+struct fecha
+{
+	int dia;
+	int mes;
+	int anio;
+};
+
+struct Turnos
+{
+	int matricula_vet;
+	fecha fecha_turno;
+	int dni_duenio;
+	char detalles_atencion[380];
+	bool mostrado;
+};
+
 void registrarvet(FILE *vet1, veterinario vet);
 void registrarusuario(FILE *usuario1, usuario user);
 int menuprincipal();
@@ -214,6 +230,31 @@ void registrarusuario(FILE *usuario1, usuario user)
 	}
 
 	fclose(usuario1);
+}
+
+void atenciones(FILE *tur1, Turnos tur, veterinario vet)
+{
+	int mes;
+	tur1=fopen("turnos.dat","r");
+	printf("\nIngrese el mes para mostrar las atenciones: ");
+	scanf("%d",&mes);
+	fread(&tur,sizeof(Turnos),1,tur1);
+	while(feof(tur1))
+	{
+		if(mes==tur.fecha_turno.mes)
+		{
+		printf("\nMatricula: %d",tur.matricula_vet);
+		printf("\nFecha\n");
+		printf("\nDia: %d",tur.fecha_turno.dia);
+		printf("\nMes: %d",tur.fecha_turno.mes);
+		printf("\nAnio: %d",tur.fecha_turno.anio);
+		printf("\nDNI del duenio: %d",tur.dni_duenio);
+		printf("\nEvaluacion de la mascota: %s",tur.detalles_atencion);
+		}
+		fread(&tur,sizeof(Turnos),1,tur1);
+	}
+
+	
 }
 	
 	

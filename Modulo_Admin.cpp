@@ -36,15 +36,18 @@ struct Turnos
 
 void registrarvet(FILE *vet1, veterinario vet);
 void registrarusuario(FILE *usuario1, usuario user);
+void atenciones(FILE *tur1, Turnos tur);
 int menuprincipal();
 main()
 {
 	setlocale(LC_ALL,"spanish");
 	veterinario vet;
+	Turnos tur;
 	usuario user;
 	int op;
 	FILE *usuario;
 	FILE *vete;
+	FILE *Tur;
 	do
 	{
 		op=menuprincipal();
@@ -60,6 +63,7 @@ main()
 			system("pause");
 			break;
 			case 3:
+			atenciones(Tur,tur);
 			system("pause");
 			break;
 			case 4:
@@ -232,10 +236,10 @@ void registrarusuario(FILE *usuario1, usuario user)
 	fclose(usuario1);
 }
 
-void atenciones(FILE *tur1, Turnos tur, veterinario vet)
+void atenciones(FILE *tur1, Turnos tur)
 {
 	int mes;
-	tur1=fopen("turnos.dat","r");
+	tur1=fopen("Turnos.dat","rb");
 	printf("\nIngrese el mes para mostrar las atenciones: ");
 	scanf("%d",&mes);
 	fread(&tur,sizeof(Turnos),1,tur1);
@@ -249,10 +253,10 @@ void atenciones(FILE *tur1, Turnos tur, veterinario vet)
 		printf("\nMes: %d",tur.fecha_turno.mes);
 		printf("\nAnio: %d",tur.fecha_turno.anio);
 		printf("\nDNI del duenio: %d",tur.dni_duenio);
-		printf("\nEvaluacion de la mascota: %s",tur.detalles_atencion);
 		}
 		fread(&tur,sizeof(Turnos),1,tur1);
 	}
+	fclose(tur1);
 
 	
 }

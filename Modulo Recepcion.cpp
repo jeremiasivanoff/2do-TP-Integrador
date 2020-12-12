@@ -42,7 +42,7 @@ struct Turnos
 	fecha fecha_turno;
 	int dni_duenio;
 	char detalles_atencion[380];
-	bool mostrado;
+ 	int mostrado; //cambié a variable int
 };
 
 int menuprincipal();
@@ -150,7 +150,7 @@ void iniciosesion(FILE *usuario1,Usuario user,bool &verificacion)
 	fread(&user,sizeof(Usuario),1,usuario1);
 	while(!feof(usuario1) and vcontra==0 and vusuario==0)
 	{
-		if(ingusuario!=user.usuario or ingcontra!=user.contra)
+		if((strcmp(ingusuario,user.usuario)!=0) or (strcmp(ingcontra,user.contra)!=0)) //Cambio a uso de función strcmp()
 		{
 			fread(&user,sizeof(Usuario),1,usuario1);
 		}
@@ -202,7 +202,7 @@ void regmascota(FILE *mascot1,Mascota mcota,bool &verificacion)
 		printf("\nIngrese el anio: ");
 		scanf("%d",&mcota.fecha_nacimiento.anio);
 		printf("\nIngrese el peso de la mascota en KG: ");
-		scanf("%d",&mcota.peso);
+		scanf("%f",&mcota.peso); // Cambié %d por %f
 		printf("\nIngrese el telefono del duenio: ");
 		_flushall();
 		gets(mcota.telefono);
@@ -215,7 +215,8 @@ void regmascota(FILE *mascot1,Mascota mcota,bool &verificacion)
 
 void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter,bool &verificacion)
 {
-	int b=1;
+	int b=0;
+	int buscar;
 	
 	if(verificacion==false)
 	{
@@ -223,7 +224,6 @@ void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter,bool &verifi
 	}
 	else
 	{
-		turno1=fopen("Turnos.dat","ab");
 		vet1=fopen("Veterinarios.dat","rb");
 		
 		if(vet1==NULL)
@@ -234,27 +234,33 @@ void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter,bool &verifi
 		}
 		
 		printf("Ingrese la matricula del veterinario: ");
-		scanf("%d",&tur.matricula_vet);
+		scanf("%d",&buscar);
 		fread(&veter,sizeof(Veterinario),1,vet1);
-		while(!feof(vet1) and b==0)
+		while(!feof(vet1))
 		{
-			if(tur.matricula_vet!=veter.matricula_vet)
+			if(buscar==veter.matricula_vet)
 			{
-				b=0;
-				fread(&veter,sizeof(Veterinario),1,vet1);
+				b=1;
+				
+				break;
 			}
 			else
 			{
-				b=1;
+				fread(&veter,sizeof(Veterinario),1,vet1);
 			}
 		}
-		
+
+		fclose(vet1);
+
 		if(b==0)
 		{
 			printf("\nMatricula de veterinario no encontrada.");
 		}
 		else
 		{
+			turno1=fopen("Turnos.dat","ab");
+
+			tur.matricula_vet=veter.matricula_vet;
 			printf("Ingrese el DNI del duenio: ");
 			scanf("%d",&tur.dni_duenio);
 			printf("\nIngrese la fecha del turno.");
@@ -264,17 +270,13 @@ void regturnos(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter,bool &verifi
 			scanf("%d",&tur.fecha_turno.mes);
 			printf("\nIngrese el anio: ");
 			scanf("%d",&tur.fecha_turno.anio);
-			printf("\nIngrese detalles sobre la mascota y la atencion realizada por el veterinario: ");
-			_flushall();
-			gets(tur.detalles_atencion);
-			tur.mostrado==false;
+			strcpy(tur.detalles_atencion,"vacio");
+			tur.mostrado=0; //cambie a = 0
 			printf("\n======Turno registrado======.");
-			
 			fwrite(&tur,sizeof(Turnos),1,turno1);
+
+			fclose(turno1);
 		}
-		
-		fclose(turno1);
-		fclose(vet1);
 	}
 	
 	

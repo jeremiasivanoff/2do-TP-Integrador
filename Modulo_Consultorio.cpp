@@ -298,18 +298,14 @@ void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int
             {                
                 esta = true;
                 dni = reg_turnos[i].dni_duenio;
-                printf("dni guardado: %d",dni);
             }   
         }   
     }
 
     if (esta)
     {
-        printf("num mascotas: %d",num_mascotas);
-    
         for (int k = 0; k < num_mascotas; k++)
         {
-            printf("k: %d",k);
             if (dni == reg_mascotas[k].dni_duenio);
             {
                 printf("\n\nApellido (Duenio) y Nombre (Mascota): ");
@@ -343,7 +339,6 @@ void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
 
     printf("\nIngrese el DNI del duenio: ");
     scanf("%d",&buscar_dni_duenio);
-
     
     for (int i = 0; i < num_turnos; i++)
     {

@@ -68,8 +68,6 @@ main()
     bool inicio = false;
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
-	
-    system("pause"); //prueba, eliminar;
 
     do
     {
@@ -193,7 +191,6 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
         while (!feof(arch))
         {
             i++;
-            printf("\ni: %d",i);
             fread(&reg_mascotas[i],sizeof(Mascota),1,arch); 
         }
         num_mascotas = i;
@@ -213,13 +210,6 @@ void cargar_registros(Usuarios reg_usuarios[50],Veterinario reg_vets[50],Mascota
         fread(&reg_turnos[i],sizeof(Turnos),1,arch);
         while (!feof(arch))
         {
-            //prueba, eliminar
-            printf("\nmatricula: %d",reg_turnos[i].matricula_vet);
-            printf("\n%d/%d/%d",reg_turnos[i].fecha_turno.dia,reg_turnos[i].fecha_turno.mes,reg_turnos[i].fecha_turno.anio);
-            printf("\ndni duenio: %d",reg_turnos[i].dni_duenio);
-            printf("\nmostrado %d\n",reg_turnos[i].mostrado);
-            //-----
-
             i++;
             fread(&reg_turnos[i],sizeof(Turnos),1,arch); 
         }

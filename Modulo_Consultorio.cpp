@@ -35,7 +35,7 @@ struct Mascota
     char localidad[60];
     fecha fecha_nacimiento;
     float peso;
-    char telefono[60];
+    char telefono[25];
 };
 
 struct Turnos
@@ -300,7 +300,7 @@ void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int
                 
                 for (int k = 0; k < num_mascotas; k++)
                 {
-                    if (reg_turnos[i].dni_duenio == reg_mascotas[k].dni_duenio);
+                    if (reg_turnos[i].dni_duenio == reg_mascotas[k].dni_duenio)
                     {
                         printf("\n\nApellido (Duenio) y Nombre (Mascota): ");
                         puts(reg_mascotas[k].ApeyNom);

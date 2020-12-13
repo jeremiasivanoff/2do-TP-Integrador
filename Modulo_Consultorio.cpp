@@ -68,7 +68,7 @@ main()
     bool inicio = false;
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
-    system("pause");
+    
     do
     {
         system("cls");

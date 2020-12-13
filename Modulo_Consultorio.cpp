@@ -68,7 +68,7 @@ main()
     bool inicio = false;
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
-
+    system("pause");
     do
     {
         system("cls");
@@ -297,30 +297,27 @@ void listado(Mascota reg_mascotas[50],Turnos reg_turnos[50],int num_mascotas,int
             if ((buscar.dia == reg_turnos[i].fecha_turno.dia) and (buscar.mes == reg_turnos[i].fecha_turno.mes) and (buscar.anio == reg_turnos[i].fecha_turno.anio))
             {                
                 esta = true;
-                dni = reg_turnos[i].dni_duenio;
+                
+                for (int k = 0; k < num_mascotas; k++)
+                {
+                    if (reg_turnos[i].dni_duenio == reg_mascotas[k].dni_duenio);
+                    {
+                        printf("\n\nApellido (Duenio) y Nombre (Mascota): ");
+                        puts(reg_mascotas[k].ApeyNom);
+                        printf("DNI del duenio: %d",reg_mascotas[k].dni_duenio);
+                        printf("\nLocalidad: ");
+                        puts(reg_mascotas[k].localidad);
+                        printf("Edad: %d",(buscar.anio-reg_mascotas[k].fecha_nacimiento.anio));
+                        printf("\nPeso: %.2f",reg_mascotas[k].peso);
+                    }
+                }
             }   
         }   
     }
 
-    if (esta)
+    if (!esta)
     {
-        for (int k = 0; k < num_mascotas; k++)
-        {
-            if (dni == reg_mascotas[k].dni_duenio);
-            {
-                printf("\n\nApellido (Duenio) y Nombre (Mascota): ");
-                puts(reg_mascotas[k].ApeyNom);
-                printf("DNI del duenio: %d",reg_mascotas[k].dni_duenio);
-                printf("\nLocalidad: ");
-                puts(reg_mascotas[k].localidad);
-                printf("Edad: %d",(buscar.anio-reg_mascotas[k].fecha_nacimiento.anio));
-                printf("\nPeso: %.2f",reg_mascotas[k].peso);
-            }
-        }
-    }
-    else
-    {
-        printf("\nNo se encontraron turno para la fecha ingresada.");
+       printf("\nNo se encontraron turno para la fecha ingresada.");
     }
 }
 

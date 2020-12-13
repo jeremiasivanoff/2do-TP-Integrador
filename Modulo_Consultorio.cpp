@@ -68,7 +68,7 @@ main()
     bool inicio = false;
     
     cargar_registros(reg_usuarios,reg_vets,reg_mascotas,reg_turnos,num_usuarios,num_vets,num_mascotas,num_turnos);
-    
+
     do
     {
         system("cls");
@@ -325,6 +325,7 @@ void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
 {
     fecha buscar;
     int buscar_dni_duenio;
+    bool esta = false;
 
     printf("\nIngrese la fecha del turno: ");
     printf("\nDia: ");
@@ -345,6 +346,7 @@ void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
             {
                 if (buscar_dni_duenio == reg_turnos[i].dni_duenio)
                 {
+                    esta = true;
                     reg_turnos[i].mostrado = 1;
                     system("cls");
                     printf("\nIngrese los detalles de la atencion (Maximo 380 caracteres, incluidos espacios):\n");
@@ -357,6 +359,12 @@ void registar_evolucion(Turnos reg_turnos[50],int num_turnos,int matricula)
             }   
         }   
     }
+
+    if (!esta)
+    {
+        printf("\nEl turno ingresado no se encuentra, o ya se le realizo una devolicion.");
+    }
+    
 }
 
 void guardar_archivo(Turnos reg_turnos[50],int num_turnos)

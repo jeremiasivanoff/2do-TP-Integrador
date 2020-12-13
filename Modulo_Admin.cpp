@@ -34,10 +34,19 @@ struct Turnos
 	bool mostrado;
 };
 
+struct Atenciones
+{
+	int matricula_vet;
+	int cant_atenciones;
+};
+
+
 void registrarvet(FILE *vet1, veterinario vet);
 void registrarusuario(FILE *usuario1, usuario user);
 void atenciones(FILE *tur1, Turnos tur);
 int menuprincipal();
+void ranking();
+
 main()
 {
 	setlocale(LC_ALL,"spanish");
@@ -67,6 +76,7 @@ main()
 			system("pause");
 			break;
 			case 4:
+			ranking();
 			system("pause");
 			break;
 			case 5:
@@ -266,7 +276,110 @@ void atenciones(FILE *tur1, Turnos tur)
 	
 }
 	
+void ranking()
+{
+	FILE *arch;
+    
+	veterinario reg_vets[50];
+	Turnos reg_turnos[50];
+	Atenciones reg_atenciones[50],aux;
+
+	bool band = true,stop;
+    int i = 0,num_vets = 0,num_turnos = 0,contador = 0;
+
+    //Archivo de veterinarios:
+    arch=fopen("Veterinarios.dat","rb");
+
+    if (arch==NULL)
+    {
+        printf("\nEl archivo 'Veterinarios.dat' no fue creado o se elimino, contacte con soporte.");
+		band = false;
+    }
+    else
+    {
+        fread(&reg_vets[i],sizeof(veterinario),1,arch);
+        while (!feof(arch))
+        {
+            i++;
+            fread(&reg_vets[i],sizeof(veterinario),1,arch);
+        }
+        num_vets = i;
+        i = 0;
+        fclose(arch);
+    }
+
+	//Archivo de turnos:
+    arch=fopen("Turnos.dat","rb");
+
+    if (arch==NULL)
+    {
+        printf("\nEl archivo 'Turnos.dat' no fue creado o se elimino, contacte con soporte.");
+		band = false;
+    }
+    else
+    {
+        fread(&reg_turnos[i],sizeof(Turnos),1,arch);
+        while (!feof(arch))
+        {
+            i++;
+            fread(&reg_turnos[i],sizeof(Turnos),1,arch); 
+        }
+        num_turnos = i;
+        i = 0;
+        fclose(arch);
+    }
+
+	if (band)
+	{
+		//Obtiene la cantidad de turnos por veterinario:
+		for (i = 0; i < num_vets; i++)
+		{
+			contador = 0;
+
+			for (int k = 0; k < num_turnos; k++)
+			{
+				if ((reg_vets[i].matricula_vet == reg_turnos[k].matricula_vet) and (reg_turnos[k].mostrado == 1))
+				{
+					contador++;
+				}
+			}
+			
+			reg_atenciones[i].matricula_vet = reg_vets[i].matricula_vet;
+			reg_atenciones[i].cant_atenciones = contador;
+		}
+		
+		//Ordena el ranking de mayor a menor:
+		do
+		{
+			stop=false;
+			
+			for (i = 0 ; i < num_vets-1 ; i++)
+			{
+				if(reg_atenciones[i].cant_atenciones < reg_atenciones[i+1].cant_atenciones)
+				{
+					aux=reg_atenciones[i];
+					reg_atenciones[i]=reg_atenciones[i+1];
+					reg_atenciones[i+1]=aux;
+					stop=true;
+				}
+			}
+		}
+		while (stop);
+
+		//Muestra el ranking de veterinarios:
+		for (i = 0; i < num_vets; i++)
+		{
+			printf("\nPuesto %d:",i+1);
+			printf("\nMatricula: %d",reg_atenciones[i].matricula_vet);
+			printf("\nMatricula: %d",reg_atenciones[i].cant_atenciones);
+			printf("\n--------------------------------");
+		}
+		
+	}
 	
+}
+
+
 
 int menuprincipal()
 {

@@ -251,7 +251,7 @@ void registrarusuario(FILE *usuario1, usuario user)
 
 void atenciones(FILE *tur1, Turnos tur)
 {
-	int mes;
+	int mes,b=0;
 	tur1=fopen("Turnos.dat","rb");
 	printf("\nIngrese el mes para mostrar las atenciones: ");
 	scanf("%d",&mes);
@@ -260,6 +260,7 @@ void atenciones(FILE *tur1, Turnos tur)
 	{
 		if((mes==tur.fecha_turno.mes) and (tur.mostrado==1))
 		{
+		b=1;
 		printf("\nMatricula: %d",tur.matricula_vet);
 		printf("\nFecha\n");
 		printf("\nDia: %d",tur.fecha_turno.dia);
@@ -272,6 +273,10 @@ void atenciones(FILE *tur1, Turnos tur)
 		fread(&tur,sizeof(Turnos),1,tur1);
 	}
 	fclose(tur1);
+	if(b==0)
+	{
+		printf("\nNo hay turnos para el mes ingresado\n");
+	}
 
 	
 }
@@ -371,7 +376,7 @@ void ranking()
 		{
 			printf("\nPuesto %d:",i+1);
 			printf("\nMatricula: %d",reg_atenciones[i].matricula_vet);
-			printf("\nMatricula: %d",reg_atenciones[i].cant_atenciones);
+			printf("\nCantidad de atenciones: %d",reg_atenciones[i].cant_atenciones);
 			printf("\n--------------------------------");
 		}
 		

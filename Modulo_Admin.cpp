@@ -115,16 +115,41 @@ void registrarvet(FILE *vet1, veterinario vet)
 
 void registrarusuario(FILE *usuario1, usuario user)
 {
-	int i,v=0,bandera=0,mayus=0,num=0,nume=0;
+	int i,v=0,bandera=0,mayus=0,num=0,nume=0,va=0;
 	int espacio=0,conse=0,cons=0;
 	char ant;
+	char nom[11];
 	system("CLS");
-	usuario1=fopen("Usuarios.dat","ab");
+	
 	printf("\tIngrese los datos del usuario");
 	printf("\nNombre de Usuario: ");
 	_flushall();
 	gets(user.usuario);
-	if(strlen(user.usuario)>=6 and strlen(user.usuario)<=10)
+	strcpy(nom,user.usuario);
+	usuario1=fopen("Usuarios.dat","rb");
+	fread(&user,sizeof(usuario),1,usuario1);
+	if(usuario1!=NULL)
+	{
+		
+		while(!feof(usuario1))
+		{
+		if(strcmp(nom,user.usuario)==0)
+		{
+			va=1;
+		}
+		}
+		fread(&user,sizeof(usuario),1,usuario1);
+		
+	}
+	fclose(usuario1);
+	if(va==1)
+	{
+		printf("\nEl Usuario ingresado ya existe, por favor ingrese otro");
+	}
+	
+	usuario1=fopen("Usuarios.dat","ab");	
+	
+	if(strlen(user.usuario)>=6 and strlen(user.usuario)<=10 and va!=1)
 		{
 			if(user.usuario[0]>=97 and user.usuario[0]<=122)
 			{

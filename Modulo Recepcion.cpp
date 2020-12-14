@@ -297,7 +297,7 @@ void listaten(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter,bool &verific
 		{
 			printf("\nError al intentar abrir los archivos, contacte con el operador del sistema...");
 			printf("\n\n");
-			system("\pause");
+			system("pause");
 			exit(1);
 		}
 		

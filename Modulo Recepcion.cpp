@@ -293,6 +293,14 @@ void listaten(FILE *turno1,Turnos tur,FILE *vet1,Veterinario veter,bool &verific
 		turno1=fopen("Turnos.dat","rb");
 		vet1=fopen("Veterinarios.dat","rb");
 		
+		if(turno1==NULL or vet1==NULL)
+		{
+			printf("\nError al intentar abrir los archivos, contacte con el operador del sistema...");
+			printf("\n\n");
+			system("\pause");
+			exit(1);
+		}
+		
 		fread(&tur,sizeof(Turnos),1,turno1);
 	    fread(&veter,sizeof(Veterinario),1,vet1);
 		

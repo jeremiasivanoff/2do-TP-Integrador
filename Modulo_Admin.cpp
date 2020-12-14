@@ -121,96 +121,97 @@ void registrarusuario(FILE *usuario1, usuario user)
 	char nom[11];
 	system("CLS");
 	
+	usuario user_aux;
+	
 	printf("\tIngrese los datos del usuario");
 	printf("\nNombre de Usuario: ");
 	_flushall();
 	gets(user.usuario);
-	strcpy(nom,user.usuario);
+
 	usuario1=fopen("Usuarios.dat","rb");
-	fread(&user,sizeof(usuario),1,usuario1);
 	if(usuario1!=NULL)
 	{
-		
+		fread(&user_aux,sizeof(usuario),1,usuario1);
 		while(!feof(usuario1))
 		{
-		if(strcmp(nom,user.usuario)==0)
-		{
-			va=1;
+			if(strcmp(user.usuario,user_aux.usuario)==0)
+			{
+				va=1;
+			}
+			fread(&user_aux,sizeof(usuario),1,usuario1);
 		}
-		}
-		fread(&user,sizeof(usuario),1,usuario1);
-		
+			
 	}
 	fclose(usuario1);
+
 	if(va==1)
 	{
 		printf("\nEl Usuario ingresado ya existe, por favor ingrese otro");
 	}
 	
+
+
 	usuario1=fopen("Usuarios.dat","ab");	
 	
 	if(strlen(user.usuario)>=6 and strlen(user.usuario)<=10 and va!=1)
+	{
+		if(user.usuario[0]>=97 and user.usuario[0]<=122)
 		{
-			if(user.usuario[0]>=97 and user.usuario[0]<=122)
-			{
-				printf("\nLa primera letra es minuscula.");
-				for(i=0;i<=user.usuario[i];i++)
-				{	
-					if(user.usuario[i]>=65 and user.usuario[i]<=90)
+			printf("\nLa primera letra es minuscula.");
+			for(i=0;i<=user.usuario[i];i++)
+			{	
+				if(user.usuario[i]>=65 and user.usuario[i]<=90)
+				{
+					mayus++;
+				
+					if(user.usuario[i]>=48 and user.usuario[i]<=57)
 					{
-						mayus++;
-					
-							if(user.usuario[i]>=48 and user.usuario[i]<=57)
-							{
-								num=num+1;
-							}
+						num=num+1;
 					}
 				}
-					
+			}
+				
 			if(mayus>=2)
 			{
 				printf("\nEl usuario contiene al menos 2 letras mayusculas.\n");
-					if(num<=3)
-					{
-						printf("\nEl Usuario contiene menos 3 digitos");
-						printf("\nUsuario valido");
-						bandera=1;
-						fwrite(&user,sizeof(usuario),1,usuario1);
-					}
-					else
-						{
-							printf("\nEl usuario no puede tener mas de 3 digitos");
-						}
-						}
-						else
-						{
-							printf("\nNo posee la cantidad minima de mayusculas deben ser al menos 2");
-							printf("\nUsuario invalido");
-						}	
+				if(num<=3)
+				{
+					printf("\nEl Usuario contiene menos 3 digitos");
+					printf("\nUsuario valido");
+					bandera=1;
+				}
+				else
+				{
+					printf("\nEl usuario no puede tener mas de 3 digitos");
+				}
 			}
 			else
 			{
-				printf("\nLa primera letra del usuario debe ser minuscula.");
+				printf("\nNo posee la cantidad minima de mayusculas deben ser al menos 2");
 				printf("\nUsuario invalido");
-			}
+			}	
 		}
 		else
 		{
-			printf("\nLa cantidad de caracteres debe ser de 6 a 10");
-			printf("\nUsuario invalido\n");
+			printf("\nLa primera letra del usuario debe ser minuscula.");
+			printf("\nUsuario invalido");
 		}
-				
-
+	}
+	else
+	{
+		printf("\nLa cantidad de caracteres debe ser de 6 a 10");
+		printf("\nUsuario invalido\n");
+	}
 		
-		if(bandera==1)
+	if(bandera==1)
+	{
+		printf("\nIngrese la contrasenia: ");
+		_flushall();
+		gets(user.contra);
+		if(strlen(user.contra)>=6 and strlen(user.contra)<=32)
 		{
-			printf("\nIngrese la contrasenia: ");
-			_flushall();
-			gets(user.contra);
-			if(strlen(user.contra)>=6 and strlen(user.contra)<=32)
+			for(i=0;i<=user.contra[i];i++)
 			{
-				for(i=0;i<=user.contra[i];i++)
-				{
 				if(user.contra[i]>=40 and user.contra[i]<=47 or user.contra[i]>=58 and user.contra[i]<=63 or user.contra[i]>=90 and user.contra[i]<=96 or user.contra[i]>=123 and user.contra[i]<=126 or user.contra[i]==239)
 				{
 					printf("\nLa contrasenia no puede contener signos de puntuacion o acentos");
@@ -220,6 +221,7 @@ void registrarusuario(FILE *usuario1, usuario user)
 					espacio=espacio+1;
 					printf("\nLa contrasenia no debe tener espacios");
 				}
+				
 				if(user.contra[i]>=48 and user.contra[i]<=57)
 				{
 					if(user.contra[i]+1==user.contra[i+1])
@@ -228,16 +230,16 @@ void registrarusuario(FILE *usuario1, usuario user)
 					}
 					
 				}
-				if(user.contra[i]>=65 and user.contra[i]<=90 or user.contra[i]>=97 and user.contra[i]<=122)
+				if((user.contra[i]>=65 and user.contra[i]<=90) or (user.contra[i]>=97 and user.contra[i]<=122))
 				{
-					if(user.contra[i]<user.contra[i+1])
+					if(user.contra[i]+1==user.contra[i+1])
 					{
 						cons=cons+1;
 					}
 				}
-			
-				}
-	
+		
+			}
+
 			if(espacio==0)
 			{
 				if(conse<3)
@@ -246,7 +248,6 @@ void registrarusuario(FILE *usuario1, usuario user)
 					{
 						printf("\nContrasenia valida");
 						bandera=2;
-						fwrite(&user,sizeof(usuario),1,usuario1);
 					}
 					else
 					{
@@ -257,17 +258,17 @@ void registrarusuario(FILE *usuario1, usuario user)
 				printf("\nLa contrasenia no debe tener mas de 4 numeros consecutivos");
 			}
 		}
-			else
-			{
-				printf("\nLa Contrasenia debe tener entre 6 y 32 caracteres");
-			}
+		else
+		{
+			printf("\nLa Contrasenia debe tener entre 6 y 32 caracteres");
 		}
+	}
+
 	if(bandera==2)
 	{
 		printf("\nIngrese el Apellido y Nombre del usuario: ");
 		_flushall();
 		gets(user.ApeNom);
-		//fwrite(&user.ApeNom,sizeof(usuario),1,usuario1);
 		fwrite(&user,sizeof(usuario),1,usuario1);
 	}
 

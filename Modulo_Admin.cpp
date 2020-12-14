@@ -163,16 +163,12 @@ void registrarusuario(FILE *usuario1, usuario user)
 				if(user.usuario[i]>=65 and user.usuario[i]<=90)
 				{
 					mayus++;
-				
 				}
 				
 				if(user.usuario[i]>=48 and user.usuario[i]<=57)
-					{
-						if(user.usuario[i]+1==user.usuario[i+1])
-						{
-						num=num+1;
-						}
-					}
+				{
+					num=num+1;
+				}
 			}
 				
 			if(mayus>=2)
